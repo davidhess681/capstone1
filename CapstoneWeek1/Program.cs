@@ -14,10 +14,11 @@ namespace CapstoneWeek1
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome to the Pig Latin Translator!");
+
             do
             {
-                Console.WriteLine("Welcome to the Pig Latin Translator!");
-                Console.Write("Enter a line to be translated: ");
+                Console.Write("\nEnter a line to be translated: ");
 
                 // store user input as a string
                 string userPhrase = Console.ReadLine();
@@ -25,8 +26,12 @@ namespace CapstoneWeek1
                 // split user input into individual words in an array
                 words = userPhrase.Split(' ');
 
+                Console.WriteLine();
+
+                // call translatePigLatin method, defined below
                 translatePigLatin();
-                Console.Write("\n\nWant to play again? (y/n): ");
+
+                Console.Write("\n\nWant to translate again? (y/n): ");
             }
             while (PlayAgain());
         }
@@ -42,6 +47,13 @@ namespace CapstoneWeek1
                 // skip empty strings in the "words" array so it doesn't crash
                 if (wordLower == "")
                 {
+                    continue;
+                }
+
+                // don't translate anything with a number or symbol (apparently @ and & aren't considered symbols but $ is..?)
+                if (wordLower.Any(char.IsDigit) || wordLower.Any(char.IsSymbol))
+                {
+                    Console.Write(wordLower);
                     continue;
                 }
 
